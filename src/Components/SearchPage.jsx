@@ -1,0 +1,62 @@
+import { useContext, useEffect, useState } from "react"
+import SearchBar from "./SearchBar"
+import PersonCard from "./PersonCard";
+import LangContext from "../LangContext"
+const apiKey = import.meta.env.VITE_API_KEY;
+
+export default function() {
+
+    const lang = useContext(LangContext);
+    const [searchValue, setSearchValue] = useState('');
+    const [persons, setPersons] = useState([]);
+    const [error, setError] = useState();
+        
+    useEffect(() => {
+        const query = new URLSearchParams({
+            api_key: apiKey,
+            language: lang,
+            query: searchValue,
+        });
+        fetch(`https://api.themoviedb.org/3/search/person?${query.toString()}`)
+            .then(response => response.json())
+            .then(obj => {
+                console.log(obj.results);
+                setPersons(obj.results)
+            })
+            .catch(err => {
+                console.error(err);
+                setError('Error occured, please try again!')
+            })
+    }, [searchValue, lang]);
+
+
+
+    
+    return(<>
+        <SearchBar
+            handleSearch={newValue => {setSearchValue(newValue); console.log(searchValue);}}
+        />
+
+        {error && <h3 className="center-text">{error}</h3>}
+        {!error && searchValue && persons.length === 0 ? 
+            <h3 className="center-text">Loading...</h3>
+        :
+            <section className="cardCont">
+                {persons.map(p => {
+                    return(
+                        <PersonCard
+                            key={`pCard${p.id}`}
+                            id={p.id}
+                            name={p.name}
+                            sex={p.gender}
+                            works={p.known_for}
+                            popularity={p.popularity}
+                            imagePath={p.profile_path}
+                            occupation={p.known_for_department}
+                        />
+                    )
+                })}
+            </section>
+        }
+    </>)
+}

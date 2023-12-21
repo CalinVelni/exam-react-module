@@ -1,0 +1,79 @@
+.navbar {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    select {
+        background-color: inherit;
+        color: inherit;
+        margin: 1rem 0;
+    }
+    menu {
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+        padding: 1rem 0;
+        li {
+            list-style: none;
+            & .link {
+                color: rgba(0, 255, 255, .8);
+            }
+            & .active {
+                pointer-events: none;
+                text-decoration: none;
+                color: gray;
+            }
+        }
+    }
+}
+
+.cardCont {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+    .card {
+        display: grid;
+        justify-content: center;
+        align-items: center;
+        gap: 1rem;
+        padding: 1rem;
+        background-color: rgba(0, 255, 255, .3);
+        }
+        .cardLink {
+            text-decoration: none;
+            color: inherit;
+            :hover {
+                background-color: rgba(0, 255, 255, .6);
+                * {
+                    background-color: unset;
+                }
+        }
+        }
+        h3 {
+            height: 50px;
+        }
+        figure {
+            height: 160px;
+            img {
+                height: 100%;
+            }
+        }
+        p {
+            span {
+                color: rgba(0, 255, 255, .8);
+            }
+        }
+        
+    }
+
+.searchbar {
+    display: flex;
+    justify-content: center;
+    gap: .3em;
+    padding: .5rem;
+}
+
+.personPage {
+    display: grid;
+    justify-content: center;
+    align-items: center;
+}
