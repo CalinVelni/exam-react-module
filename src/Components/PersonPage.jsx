@@ -1,7 +1,6 @@
 import { useContext, useEffect, useState} from "react"
 import { Navigate, useParams } from "react-router-dom";
 import LangContext from "../LangContext";
-import { normalizePath } from "vite";
 const apiKey = import.meta.env.VITE_API_KEY;
 
 export default function() {
